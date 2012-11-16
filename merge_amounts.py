@@ -16,7 +16,8 @@ for line in amounts:
 for line in ids:
     print line
     y1, y2 = line.strip().split()
-    dic[y2] = (y1, dic[y2][1])
+    if dic[y2][0] == "BAD":
+        dic[y2] = (y1, dic[y2][1])
 
 output = open("ids_and_amounts", 'w')
 
