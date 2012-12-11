@@ -1,7 +1,7 @@
-function [matrix, ydata] = read_Matrix(filename, filename2)
+function [matrix, ydata] = read_Matrix(filename, filename2, numwords, numdocs)
 
-numwords = 30799;
-numdocs = 2000;
+%numwords = 30799;
+%numdocs = 2000;
 
 matrix = sparse(numdocs, numwords);
 ydata = zeros(numdocs,1);
