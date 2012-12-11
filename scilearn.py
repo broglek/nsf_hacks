@@ -4,21 +4,19 @@
 from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.naive_bayes import MultinomialNB
+from sklearn import cross_validation
 
 class Learner:
-  def __init__(self, data_train, data_test):
-    #data is a list of tuples (x,y), where x is a list representing a feature vector
-    #and y is the classification of the feature vector
-    self.train_data = list()
-    self.test_data = list()
-    
-    self.train_data.extend(data_train)
-    self.test_data.extend(data_test)
+  def __init__(self, data):
+    #data is an ExampleData class that has already read in the
+    #data vectors and classifications
+    self.data = data
     
     #Create a dictionary of different classifiers
     self.clf = dict()
     self.clf["SGD"] = SGDClassifier(loss="hinge", penalty="l2", n_iter=100, shuffle=True)
     self.clf["SVM"] = svm.SVC()
+    self.clf["LinearSVC"] = svm.LinearSVC()
     self.clf["NB"] = MultinomialNB()
     
     #Create a dictionary of "results" for each classifier
@@ -29,42 +27,16 @@ class Learner:
   Train the classifier specified by "classifier"
   '''
   def learn(self, classifier):
-    X = list()
-    Y = list()
-    for x,y in self.train_data:
-      X.append(x)
-      Y.append(y)
-    self.clf[classifier].fit(X, Y)
+    self.clf[classifier].fit(self.data.Xdata, self.data.Ydata)
   
   '''
-  Test the classifier specified by "classifier" on test data
+  Test the classifier specified by "classifier" by using
+  kfold cross-validation. 
   '''
-  def test(self, classifier, testdata="test"):
-    correct = 0.0
-    total = 0.0
-    wrong = dict()
-    data = list()
-    
-    if (testdata == "train"):
-      data.extend(self.train_data)
-    else:
-      data.extend(self.test_data)
-    
-    for x,y in data:
-      predicted = self.predict(x, classifier)
-      if predicted == y:
-        correct += 1
-      else:
-        if not y in wrong.keys():
-          wrong[y] = 1
-        else:
-          wrong[y] += 1
-      total += 1
-    if total != 0:
-      self.results[classifier + "_" + testdata] = wrong
-      return correct/total
-    else:
-      return -1
+  def test(self, classifier, k=4):
+    scores = cross_validation.cross_val_score(self.clf[classifier],
+      self.data.Xdata, self.data.Ydata, cv=k)
+    print scores
   
   '''
   Predict the classification of feature vector x using "classifier"
@@ -72,27 +44,3 @@ class Learner:
   def predict(self, x, classifier):
     return self.clf[classifier].predict(x)
 
-
-def readExamples(path):
-  examples = list()
-  exampleFile = open(path)
-  for line in exampleFile: 
-    inputs = [int(x) for x in line.split()]
-    level = inputs.pop(0)
-    examples.append((inputs, level))
-  exampleFile.close()
-  return examples
-
-trainExamples = readExamples('train_results.txt')
-validationExamples = readExamples('tests_results.txt')
-learner = Learner(trainExamples, validationExamples)
-
-print "------------------------"
-for cl in learner.clf.keys():
-  learner.learn(cl)
-  print "%s:" % (cl)
-  print "train success rate: %.4f, validation success rate: %.4f" % (learner.test(cl, "train"), learner.test(cl, "test"))
-  print "Results:"
-  print "Train: " + str(learner.results[cl + "_train"])
-  print "Test: " + str(learner.results[cl + "_test"])
-  print "------------------------"
