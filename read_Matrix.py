@@ -9,14 +9,14 @@ class ExampleData:
   def readDataVectorFile(self, filename):
     f = open(filename, 'r')
     for line in f:
-      ff = line.split(' ')
-      self.Xdata[int(ff[0])-1, int(ff[1])-1] = int(ff[2])
+      r,c,value = line.split(' ')
+      self.Xdata[int(r)-1, int(c)-1] = int(value)
 
   def readClassificationFile(self, filename):
     f = open(filename)
     for line in f:
-      ff = line.split(' ')
-      self.Ydata[int(ff[0])-1] = int(ff[1])
+      y,value = line.split(' ')
+      self.Ydata[int(y)-1] = float(value)
 	
   def getSingleExample(self, i):
     return (self.Xdata.getrow(i), self.Ydata[i])
