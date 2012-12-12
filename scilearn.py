@@ -16,10 +16,14 @@ class Learner:
     #Create a dictionary of different classifiers
     self.clf = dict()
     self.clf["SGD"] = SGDClassifier(loss="hinge", penalty="l2", n_iter=100, shuffle=True)
+    # save to file incase we tweak params
+    print self.clf["SGD"]
     self.clf["SVM"] = svm.SVC()
+    print self.clf["SVM"]
     self.clf["LinearSVC"] = svm.LinearSVC()
+    print self.clf["LinearSVC"] 
     self.clf["NB"] = MultinomialNB()
-    
+    print self.clf["NB"]
     #Create a dictionary of "results" for each classifier
     #Each result is itself a dictionary of how many misclassified
     self.results = dict()
