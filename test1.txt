@@ -1,0 +1,11 @@
+NB: 0.4005
+LinearSVC: 0.3715
+NB: 0.4045
+LinearSVC: 0.3645
+NB: 0.402
+LinearSVC: 0.3765
+NB: 0.4005
+LinearSVC: 0.3675
+NB: 0.4
+LinearSVC: 0.373
+NB Avg:0.401500	LinearSVC Avg:0.370600

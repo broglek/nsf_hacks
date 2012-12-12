@@ -5,6 +5,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import cross_validation
+from numpy import shape
 
 class Learner:
   def __init__(self, data):
@@ -51,6 +52,12 @@ class Learner:
     self.results = results
     return correct / total
   
+  
+  def test_kf(self, classifier, testData, testTargets):
+    ndim = shape(testData)
+    kf = cross_validation.KFold(ndim[0], k=5, shuffle = True)
+    scores = cross_validation.cross_val_score(self.clf[classifier], testData, testTargets, cv=kf)
+    return scores
   '''
   Predict the classification of feature vector x using "classifier"
   '''
