@@ -33,10 +33,23 @@ class Learner:
   Test the classifier specified by "classifier" by using
   kfold cross-validation. 
   '''
-  def test(self, classifier, k=4):
-    scores = cross_validation.cross_val_score(self.clf[classifier],
-      self.data.Xdata, self.data.Ydata, cv=k)
-    print scores
+  def test(self, classifier, testData, testTargets):
+    correct = 0.0
+    total = 0.0
+    results = dict()
+    
+    for i in range(len(testTargets)):
+      predicted = self.predict(testData.getrow(i), classifier)
+      if predicted == testTargets[i]:
+        correct += 1.0
+      else:
+        if testTargets[i] in results.keys():
+          results[testTargets[i]] += 1.0
+        else:
+          results[testTargets[i]] = 0.0
+      total += 1.0
+    self.results = results
+    return correct / total
   
   '''
   Predict the classification of feature vector x using "classifier"
