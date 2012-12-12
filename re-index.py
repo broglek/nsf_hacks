@@ -15,8 +15,11 @@ count = 1
 
 for line in amounts:
     x1, x2 = line.strip().split()
-    dict_newid[x1] = count
-    count += 1
+    if not(x1 in dict_newid):
+        dict_newid[x1] = count
+        count += 1
+    else:
+        dict_newid[x1] = count
     output.write(str(dict_newid[x1]) + " " + str(x2) + '\n')
 
 
