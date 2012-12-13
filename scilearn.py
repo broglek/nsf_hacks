@@ -39,22 +39,24 @@ class Learner:
   kfold cross-validation. 
   '''
   def test(self, classifier, testData, testTargets):
-    correct = 0.0
-    total = 0.0
-    results = dict()
+    return self.clf[classifier].score(testData, testTargets)
+    # correct = 0.0
+    # total = 0.0
+    # results = dict()
     
-    for i in range(len(testTargets)):
-      predicted = self.predict(testData.getrow(i), classifier)
-      if predicted == testTargets[i]:
-        correct += 1.0
-      else:
-        if testTargets[i] in results.keys():
-          results[testTargets[i]] += 1.0
-        else:
-          results[testTargets[i]] = 0.0
-      total += 1.0
-    self.results = results
-    return correct / total
+    # for i in range(len(testTargets)):
+      # predicted = self.predict(testData.getrow(i), classifier)
+      # if predicted == testTargets[i]:
+        # correct += 1.0
+      # else:
+        # if testTargets[i] in results.keys():
+          # results[testTargets[i]] += 1.0
+        # else:
+          # results[testTargets[i]] = 0.0
+      # total += 1.0
+    # self.results = results
+    # return correct / total
+  
   
   
   def test_kf(self, classifier, testData, testTargets):

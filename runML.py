@@ -49,6 +49,22 @@ def runML(dataFile, classFile, vocab, samples):
     avgSGD /=numTrials
     avgSVC /=numTrials
     print "NB Avg:%f\tLinearSVC Avg:%f\tSVM Avg:%f\tSGD Avg:%f" %(avgNB, avgLin, avgSVC, avgSGD)
+
+def runTrainError(dataFile, classFile, vocab, samples):
+    print "Samples:" , samples
+    print "Vocab size:", vocab
+    data = ExampleData(int(samples), int(vocab))
+    data.readDataVectorFile(dataFile)
+    data.readClassificationFile(classFile)
+    
+    learner = Learner(data)
+    error = dict()
+    for cl in learner.clf.keys():
+        learner.learn(cl)
+        error[cl] = learner.test(cl, data.Xdata, data.Ydata)
+    
+    print "NB train acc:%f\tLinearSVC train acc:%f\tSVM train acc:%f\tSGD train acc:%f" %(error["NB"], error["LinearSVC"], error["SVM"], error["SGD"])
+
     
 class Usage(Exception):
     def __init__(self, msg):
@@ -83,7 +99,8 @@ def main(argv=None):
                     
         except getopt.error, msg:
              raise Usage(msg)
-        runML(datafile, classfile, vocab, samples)
+        #runML(datafile, classfile, vocab, samples)
+        runTrainError(datafile, classfile, vocab, samples)
     except Usage, err:
         print >>sys.stderr, err.msg
         print >>sys.stderr, "for help use --help"
