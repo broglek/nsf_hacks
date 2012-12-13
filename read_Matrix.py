@@ -26,7 +26,7 @@ class ExampleData:
       if not y in keydict:
         keydict[y] = count
         count += 1
-      self.Ydata[int(y)] = float(value)
+      self.Ydata[keydict[y]] = float(value)
 	
   def getSingleExample(self, i):
     return (self.Xdata.getrow(i), self.Ydata[i])
