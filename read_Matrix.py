@@ -8,14 +8,24 @@ class ExampleData:
 	
   def readDataVectorFile(self, filename):
     f = open(filename, 'r')
+    keydict = {}
+    count = 0
     for line in f:
       r,c,value = line.split(' ')
-      self.Xdata[int(r)-1, int(c)-1] = int(value)
+      if not r in keydict:
+        keydict[r] = count
+        count += 1
+      self.Xdata[keydict[r], int(c)-1] = int(value)
 
   def readClassificationFile(self, filename):
     f = open(filename)
+    keydict = {}
+    count = 0
     for line in f:
       y,value = line.split(' ')
+      if not y in keydict:
+        keydict[y] = count
+        count += 1
       self.Ydata[int(y)-1] = float(value)
 	
   def getSingleExample(self, i):
