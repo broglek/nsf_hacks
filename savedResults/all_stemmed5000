@@ -1,0 +1,33 @@
+Samples: 5000
+Vocab size: 19910
+SGDClassifier(alpha=0.0001, class_weight=None, epsilon=0.1, eta0=0.0,
+       fit_intercept=True, learning_rate=optimal, loss=hinge, n_iter=100,
+       n_jobs=1, penalty=l2, power_t=0.5, rho=0.85, seed=0, shuffle=True,
+       verbose=0, warm_start=False)
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel=rbf, probability=False, shrinking=True, tol=0.001, verbose=False)
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss=l2, multi_class=ovr, penalty=l2, tol=0.0001,
+     verbose=0)
+MultinomialNB(alpha=1.0, fit_prior=True)
+NB: 0.1846
+LinearSVC: 0.3076
+SGD: 0.2768
+SVM: 0.3878
+NB: 0.1828
+LinearSVC: 0.3116
+SGD: 0.266
+SVM: 0.387
+NB: 0.1808
+LinearSVC: 0.312
+SGD: 0.2696
+SVM: 0.388
+NB: 0.1892
+LinearSVC: 0.318
+SGD: 0.2732
+SVM: 0.388
+NB: 0.172
+LinearSVC: 0.3092
+SGD: 0.2658
+SVM: 0.388
+NB Avg:0.181880	LinearSVC Avg:0.311680	SVM Avg:0.387760	SGD Avg:0.270280
