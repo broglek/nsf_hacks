@@ -3,6 +3,8 @@ import glob
 import os
 import re
 import numpy
+import matplotlib
+matplotlib.use('PDF')
 import matplotlib.pyplot as plt
 
 
