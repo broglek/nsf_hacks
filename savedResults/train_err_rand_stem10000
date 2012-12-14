@@ -10,24 +10,4 @@ LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
      intercept_scaling=1, loss=l2, multi_class=ovr, penalty=l2, tol=0.0001,
      verbose=0)
 MultinomialNB(alpha=1.0, fit_prior=True)
-NB: 0.2016
-LinearSVC: 0.2418
-SGD: 0.1817
-SVM: 0.2689
-NB: 0.1892
-LinearSVC: 0.2367
-SGD: 0.1822
-SVM: 0.2687
-NB: 0.1909
-LinearSVC: 0.2396
-SGD: 0.1788
-SVM: 0.2692
-NB: 0.1912
-LinearSVC: 0.2364
-SGD: 0.1895
-SVM: 0.2696
-NB: 0.1915
-LinearSVC: 0.2425
-SGD: 0.1783
-SVM: 0.2693
-NB Avg:0.192880	LinearSVC Avg:0.239400	SVM Avg:0.269140	SGD Avg:0.182100
+NB train acc:0.284400	LinearSVC train acc:0.888600	SVM train acc:0.438300	SGD train acc:0.277100
